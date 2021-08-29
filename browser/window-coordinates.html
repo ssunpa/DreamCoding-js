@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Coordinamtes</title>
+        <style>
+            aside {
+                position: fixed;
+                top: 5px;
+                right: 10px;
+            }
+            div {
+                width: 200px;
+                height: 200px;
+                margin: 5px;
+                background-color: darksalmon;
+            }
+            .special {
+                background-color: darkseagreen;
+            }
+        </style>
+    </head>
+    <body>
+        <aside>
+            <button class="btn1">Scroll by 100px</button>
+            <button class="btn2">Scroll to 100px</button>
+            <button class="btn3">Scroll into special</button>
+        </aside>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div class="special"></div>
+        <div></div>
+        <div></div>
+    </body>
+    <script>
+        const special = document.querySelector('.special');
+
+        special.addEventListener('click', (event) => {
+            const element = special.getBoundingClientRect();
+            console.log(element);
+            console.log(`client: ${event.clientX}, ${event.clientY}`);
+            console.log(`page: ${event.pageX}, ${event.pageY}`);
+        });
+
+        const scrollBy = document.querySelector('.btn1');
+        const scrollTo = document.querySelector('.btn2');
+        const scrollGo = document.querySelector('.btn3');
+
+        scrollTo.addEventListener('click', () => {
+            window.scrollTo(0, 100);
+        });
+
+        scrollBy.addEventListener('click', () => {
+            window.scrollBy(0, 100);
+        });
+
+        scrollGo.addEventListener('click', () => {
+            special.scrollIntoView();
+        });
+    </script>
+</html>
