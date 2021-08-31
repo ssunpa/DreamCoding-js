@@ -1,0 +1,58 @@
+body {
+    height: 100%;
+    background-color: rgb(217, 208, 219);
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+.container {
+    background-color: rgb(255, 241, 255);
+    width: 340px;
+    height: 500px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.list_header {
+    background-color: rgb(182, 118, 182);
+    height: 70px;
+    border-radius: 15px 15px 0px 0px;
+}
+h2 {
+    color: white;
+    text-align: center;
+}
+.list_box {
+    height: 100%;
+    width: 80%;
+    margin: 10px 30px;
+}
+.list_box li {
+    display: flex;
+    justify-content: space-between;
+}
+#list_form {
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+}
+.list_add_txt {
+    background-color: white;
+    border: none;
+    height: 35px;
+}
+.list_add_btn {
+    background-color: rgb(182, 118, 182);
+    border: none;
+    border-radius: 0px 0px 15px 15px;
+    height: 100%;
+    font-size: 43px;
+}
+.list_add_btn :hover {
+    font-size: 48px;
+}
+
+li i:hover {
+    color: red;
+}
