@@ -1,0 +1,79 @@
+html {
+    height: 100%;
+}
+body {
+    margin: 0;
+    height: 100%;
+    background-image: url('img/background.png');
+    background-size: 100%;
+    border: black;
+}
+button {
+    height: 80px;
+    width: 80px;
+    border-radius: 20px;
+    border: 2px solid black;
+    background-color: blanchedalmond;
+    font-size: 35px;
+    cursor: pointer;
+}
+.top {
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.timer {
+    margin: 10px 0;
+    background-color: white;
+    width: 180px;
+    height: 50px;
+    border: 3px solid black;
+    border-radius: 10px;
+    text-align: center;
+}
+.countdownTimer {
+    margin: auto;
+    font-size: 32px;
+}
+.counter {
+    width: 70px;
+    height: 70px;
+    background-color: lightcoral;
+    border-radius: 50px;
+    border: 2px solid black;
+    color: white;
+}
+.carrotCount {
+    margin: 10px 0;
+    font-size: 34px;
+    text-align: center;
+}
+.bottom {
+    height: 50%;
+}
+.playground {
+    width: 100%;
+    height: 100%;
+}
+.retry {
+    display: none;
+}
+.retry.active {
+    display: block;
+    margin: auto;
+    width: 480px;
+    height: 180px;
+    background-color: rgba(0, 0, 0, 0.575);
+    border-radius: 30px;
+    color: white;
+    font-size: 35px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.retry p {
+    margin: 10px 0;
+}
