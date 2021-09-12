@@ -8,6 +8,11 @@ body {
     background-size: 100%;
     border: black;
 }
+img {
+    position: absolute;
+    width: 70px;
+    height: 70px;
+}
 button {
     height: 80px;
     width: 80px;
@@ -16,6 +21,12 @@ button {
     background-color: blanchedalmond;
     font-size: 35px;
     cursor: pointer;
+}
+.stopButton {
+    display: none;
+}
+.stopButton.active {
+    display: block;
 }
 .top {
     height: 50%;
@@ -54,14 +65,20 @@ button {
     height: 50%;
 }
 .playground {
+    position: relative;
     width: 100%;
     height: 100%;
 }
+
 .retry {
     display: none;
 }
 .retry.active {
-    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
     margin: auto;
     width: 480px;
     height: 180px;
