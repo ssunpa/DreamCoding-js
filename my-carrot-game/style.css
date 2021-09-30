@@ -7,11 +7,22 @@ body {
     background-image: url('img/background.png');
     background-size: 100%;
     border: black;
+    overflow: hidden;
+}
+.gameImage {
+    margin: 0;
+    height: 100%;
+    width: 100%;
 }
 img {
+    cursor: pointer;
     position: absolute;
     width: 70px;
     height: 70px;
+}
+img:hover {
+    width: 75px;
+    height: 75px;
 }
 button {
     height: 80px;
