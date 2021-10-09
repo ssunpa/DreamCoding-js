@@ -1,4 +1,5 @@
 'use strict';
+import PopUp from './popup.js';
 
 const CARROT_SIZE = 80;
 const CARROT_COUNT = 15;
@@ -11,10 +12,6 @@ const gameBtn = document.querySelector('.game__button');
 const gameTimer = document.querySelector('.game__timer');
 const gameScore = document.querySelector('.game__score');
 
-const popUp = document.querySelector('.pop-up');
-const popUpText = document.querySelector('.pop-up__message');
-const popUpRefresh = document.querySelector('.pop-up__refresh');
-
 const carrotSound = new Audio('sound/carrot_pull.mp3');
 const alertSound = new Audio('sound/alert.wav');
 const bgSound = new Audio('sound/bg.mp3');
@@ -25,6 +22,11 @@ let started = false;
 let score = 0;
 let timer = undefined;
 
+const gameFinishBanner = new PopUp();
+gameFinishBanner.setClickListener(() => {
+    startGame();
+});
+
 field.addEventListener('click', onFieldClick);
 
 gameBtn.addEventListener('click', () => {
@@ -33,11 +35,6 @@ gameBtn.addEventListener('click', () => {
     } else {
         startGame();
     }
-});
-
-popUpRefresh.addEventListener('click', () => {
-    startGame();
-    hidePopUp();
 });
 
 function startGame() {
@@ -53,7 +50,7 @@ function stopGame() {
     started = false;
     stopGameTimer();
     hideGameButton();
-    showPopUpWithText('REPLAY❓');
+    gameFinishBanner.showWithText('REPLAY❓');
     playSound(alertSound);
     stopSound(bgSound);
 }
@@ -68,7 +65,7 @@ function finishGame(win) {
     }
     stopGameTimer();
     stopSound(bgSound);
-    showPopUpWithText(win ? 'YOU WON🎉' : 'YOU LOST💩');
+    gameFinishBanner.showWithText(win ? 'YOU WON🎉' : 'YOU LOST💩');
 }
 
 function showStopButton() {
@@ -108,15 +105,6 @@ function updateTimerText(time) {
     const minutes = Math.floor(time / 60);
     const secondes = time % 60;
     gameTimer.innerText = `${minutes}:${secondes}`;
-}
-
-function showPopUpWithText(text) {
-    popUpText.innerText = text;
-    popUp.classList.remove('pop-up--hide');
-}
-
-function hidePopUp() {
-    popUp.classList.add('pop-up--hide');
 }
 
 function initGame() {
