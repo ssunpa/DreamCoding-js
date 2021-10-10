@@ -1,13 +1,11 @@
 'use strict';
 import PopUp from './popup.js';
+import Field from './field.js';
 
-const CARROT_SIZE = 80;
 const CARROT_COUNT = 15;
 const BUG_COUNT = 15;
 const GAME_DURATION_SEC = 30;
 
-const field = document.querySelector('.game__field');
-const fieldRect = field.getBoundingClientRect();
 const gameBtn = document.querySelector('.game__button');
 const gameTimer = document.querySelector('.game__timer');
 const gameScore = document.querySelector('.game__score');
@@ -15,7 +13,7 @@ const gameScore = document.querySelector('.game__score');
 const carrotSound = new Audio('sound/carrot_pull.mp3');
 const alertSound = new Audio('sound/alert.wav');
 const bgSound = new Audio('sound/bg.mp3');
-const bugSound = new Audio('sound/gug_pull.mp3');
+const bugSound = new Audio('sound/bug_pull.mp3');
 const winSound = new Audio('sound/game_win.mp3');
 
 let started = false;
@@ -27,7 +25,23 @@ gameFinishBanner.setClickListener(() => {
     startGame();
 });
 
-field.addEventListener('click', onFieldClick);
+const gameField = new Field(CARROT_COUNT, BUG_COUNT);
+gameField.setClickListener(onItemClick);
+
+function onItemClick(item) {
+    if (!started) {
+        return;
+    }
+    if (item == 'carrot') {
+        score++;
+        updateScoreBoard();
+        if (score == CARROT_COUNT) {
+            finishGame(true);
+        }
+    } else if (item == 'bug') {
+        finishGame(false);
+    }
+}
 
 gameBtn.addEventListener('click', () => {
     if (started) {
@@ -109,32 +123,10 @@ function updateTimerText(time) {
 
 function initGame() {
     score = 0;
-    field.innerHTML = '';
     gameScore.innerText = CARROT_COUNT;
-    //벌레와 당근 생성 후 field추가
-    addItem('carrot', CARROT_COUNT, 'img/carrot.png');
-    addItem('bug', BUG_COUNT, 'img/bug.png');
+    gameField.init();
 }
 
-function onFieldClick(event) {
-    if (!started) {
-        return;
-    }
-    const target = event.target;
-    if (target.matches('.carrot')) {
-        //당근
-        target.remove();
-        score++;
-        playSound(carrotSound);
-        updateScoreBoard();
-        if (score == CARROT_COUNT) {
-            finishGame(true);
-        }
-    } else if (target.matches('.bug')) {
-        //벌레
-        finishGame(false);
-    }
-}
 function playSound(sound) {
     sound.currentTime = 0;
     sound.play();
@@ -146,27 +138,4 @@ function stopSound(sound) {
 
 function updateScoreBoard() {
     gameScore.innerText = CARROT_COUNT - score;
-}
-
-function addItem(className, count, imgPath) {
-    const x1 = 0;
-    const y1 = 0;
-    const x2 = fieldRect.width - CARROT_SIZE;
-    const y2 = fieldRect.height - CARROT_SIZE;
-
-    for (let i = 0; i < count; i++) {
-        const item = document.createElement('img');
-        item.setAttribute('class', className);
-        item.setAttribute('src', imgPath);
-        item.style.position = 'absolute';
-        const x = randomNumber(x1, x2);
-        const y = randomNumber(y1, y2);
-        item.style.left = `${x}px`;
-        item.style.top = `${y}px`;
-        field.appendChild(item);
-    }
-}
-
-function randomNumber(min, max) {
-    return Math.random() * (max - min) + min;
 }
