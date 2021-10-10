@@ -1,4 +1,5 @@
 'use strict';
+import * as Sound from './sound.js';
 
 const CARROT_SIZE = 80;
 const carrotSound = new Audio('sound/carrot_pull.mp3');
@@ -42,26 +43,21 @@ export default class Field {
         }
     }
 
-    onClick(event) {
+    onClick = (event) => {
         const target = event.target;
         if (target.matches('.carrot')) {
             //당근
             target.remove();
-            playSound(carrotSound);
+            Sound.playCarrot();
             this.onItemClick && this.onItemClick('carrot');
         } else if (target.matches('.bug')) {
             //벌레
-            playSound(bugSound);
+            Sound.playBug;
             this.onItemClick && this.onItemClick('bug');
         }
-    }
+    };
 }
 
 function randomNumber(min, max) {
     return Math.random() * (max - min) + min;
-}
-
-function playSound(sound) {
-    sound.currentTime = 0;
-    sound.play();
 }
