@@ -1,9 +1,13 @@
 'use strict';
 import PopUp from './popup.js';
-import Game from './game.js';
+import GameBuilder from './game.js';
 
 const gameFinishBanner = new PopUp();
-const game = new Game(20, 5, 5);
+const game = new GameBuilder()
+    .gameDuration(10)
+    .carrotCount(5)
+    .bugCount(5)
+    .build();
 
 game.setGameStopLinsener((reason) => {
     console.log(reason);
