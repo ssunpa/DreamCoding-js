@@ -1,6 +1,7 @@
 'use strict';
 import PopUp from './popup.js';
-import GameBuilder from './game.js';
+import * as Sound from './sound.js';
+import { GameBuilder, Reason } from './game.js';
 
 const gameFinishBanner = new PopUp();
 const game = new GameBuilder()
@@ -10,17 +11,19 @@ const game = new GameBuilder()
     .build();
 
 game.setGameStopLinsener((reason) => {
-    console.log(reason);
     let message;
     switch (reason) {
-        case 'cancel':
+        case Reason.cancle:
             message = 'REPLAY❓';
+            Sound.playAlert();
             break;
-        case 'win':
+        case Reason.win:
             message = 'YOU WON🎉';
+            Sound.playWin();
             break;
-        case 'lose':
+        case Reason.lose:
             message = 'YOU LOST💩';
+            Sound.playBug();
             break;
         default:
             throw new Error('not valid reaseon');
